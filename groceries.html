@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Grocery List</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='styles.css'>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <!-- <h1>Grocery List</h1> -->
+    <!-- <p>Add items to your grocery list so you never ever ever again...forget</p> -->
+    <div id="app">
+        <form @submit.prevent="addItem">
+            Add item:
+            <input type="text" v-model="newItem">
+        </form>
+        <div class="dynamicList">
+            <ol v-if="hasItems">
+                <li v-for="item in items" :key="item.id" :class="{ completed: item.checked}">
+                    <input type="checkbox" v-model="item.checked">
+                    <label :style="{ textDecoration: item.checked ? 'line-through' : 'none' }">
+                        {{ item.name }}
+                    </label>
+                </li>
+            </ol>
+            <p v-else="!hasItems">List is empty</p>
+            <!-- v-else-if -->
+            <!-- v-else -->
+            <p v-show="hasItems">
+             {{ totalAmountMessage }}
+            </p>
+            <button @click="removeItem">Remove Last Item (for no reason)</button>
+        </div>
+    </div>    
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    newItem: '',
+                    items: [
+                        {id: 1, name: 'Eggs', checked: false},
+                        {id: 11, name: 'Bacon', checked: false},
+                        {id: 15, name: 'Hash Browns', checked: false},
+                        {id: 33, name: 'Trash Bags', checked: false},
+                    ]
+                }
+            },
+
+            created() {
+                console.log('My component is created');
+            },
+
+            mounted() {
+                console.log('My component is mounted');
+            },
+
+            computed: {
+                totalAmountMessage(){
+                    return `${this.totalAmountOfItems} item${this.totalAmountOfItems === 1 ? '' : 's'} in our list`
+                },
+                hasItems() {
+                    return this.totalAmountOfItems !== 0
+                },
+                totalAmountOfItems() {
+                    return this.items.length
+                }
+            },
+
+            methods: {
+                addItem() {
+                    this.items.push({
+                        id: Math.random(),
+                        name:this.newItem,
+                        checked: false
+                    })
+                    this.newItem = '';
+                },
+                removeItem() {
+                    this.items.pop();
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>

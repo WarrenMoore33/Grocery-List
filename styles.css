@@ -1,0 +1,60 @@
+body {
+    text-align: center;
+    font-family: 'Arial';
+    background: #e16e1d url(/shopList.jpg) no-repeat top;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+button {
+    padding: 10px 25px;
+    border-radius: 10px;
+    background: #9a2626;
+    font-weight: bold;
+    color: white;
+    border-color: white;
+    border-style: solid;
+    cursor: pointer;
+}
+
+#app {
+    max-width: 635px;
+    width: 100%;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, .7);
+    color: white;
+    margin-top: 20px;
+    padding: 20px;
+    min-height: 350px;
+    border-radius: 7px;
+}
+form {
+    
+}
+.dynamicList {
+    text-align: left;
+}
+ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+ol li {
+    width: 40%;
+    margin: 5px 2px;
+    padding: 10px 20px;
+    border: 2px solid #eee;
+    border-radius: 7px;
+    font-weight: bold;
+    transition: .3s;
+    background: rgba(0, 0, 0, .5);
+}
+
+li.completed {
+    border-color: green;
+    background: rgba(120, 255, 64, .7);
+    color: white;
+}
